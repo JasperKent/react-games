@@ -1,0 +1,17 @@
+.field{
+    font-size:0;
+}
+
+.field button {
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    padding: 1px;
+    font-size: 10px;
+    box-sizing: unset;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-width: 1px;
+    border-color: lightgray;
+}
