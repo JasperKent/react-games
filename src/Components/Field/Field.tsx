@@ -52,8 +52,8 @@ export const Field = () => {
             <div className="top-row">
                 <Counter count={unexploded}></Counter>
                 <span className='message-text'>
-                    {playing == 'lost' && 'Bad luck! Try again.'}
-                    {playing == 'won' && 'Congratulations! You cleared the field.'}
+                    {playing === 'lost' && 'Bad luck! Try again.'}
+                    {playing === 'won' && 'Congratulations! You cleared the field.'}
                 </span>
             </div>
             <div className="field">
