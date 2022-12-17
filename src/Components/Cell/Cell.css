@@ -40,7 +40,7 @@ button.val-0 {
     background-color: lightgray;
 }
 
-button.mine-marked {
+button.mine-flagged {
     background-image: url("../../../public/images/flag.png");
 }
 

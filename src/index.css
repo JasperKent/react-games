@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'ticking_timebomb_bbregular';
+  src: url('../public/fonts/ticking-timebomb-bb.regular-webfont.woff2') format('woff2'),
+       url('../public/fonts/ticking-timebomb-bb.regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

@@ -1,0 +1,14 @@
+.counter {
+    font-family: 'ticking_timebomb_bbregular';
+    color:red;
+    font-size: 3rem;
+    border: 4px groove silver;
+    padding-left:0.2rem;
+    padding-right:0.2rem;
+}
+
+.counter>span{
+    display: inline-block;
+    width: 1.4rem;
+    text-align: right;
+}
