@@ -71,6 +71,7 @@ export class CellState{
         {
             case 'none': 
                 this.flagged = 'flag';
+                this.onClear();
                 break;
             case 'flag': 
                 this.flagged = 'query';
