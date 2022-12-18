@@ -1,5 +1,7 @@
 .field{
     font-size:0;
+    margin-left:auto;
+    margin-right: auto;
 }
 
 .field button {
@@ -26,7 +28,24 @@
     font-size: 2.2rem;
 }
 
+.bottom-row * {
+    font-size: 2rem;
+}
+
 .bottom-row button {
     margin-top: 0.5rem;
-    font-size: 2rem;
+}
+
+.bottom-row span {
+    margin-top: 0.2rem;
+    float: right;
+}
+
+.bottom-row input{
+    width:5rem;
+    margin-left: 0.3rem;
+}
+
+.bottom-row label{
+    margin-left: 0.3rem;
 }

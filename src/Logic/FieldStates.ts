@@ -84,8 +84,10 @@ export class CellState{
 }
 
 export class FieldStates{
+
+    static get CellWidth() {return 29;}
+
     private _playing: 'playing' | 'won' | 'lost' = 'playing';
-    private _mineCount: number;
 
     private get allMinesMarked(): boolean{
         for (let row = 0; row < this.height; ++row) {
@@ -102,25 +104,24 @@ export class FieldStates{
     private get allNonMinesCleared(): boolean{
         const cleared = this.cells.reduce((sum, row) => sum + row.filter(c => c.isBlown).length, 0);
 
-        return cleared + this._mineCount == this.width * this.height;
+        return cleared + this.mineCount === this.width * this.height;
     }
 
     readonly cells: CellState[][];
  
     get unexploded (){
-        return this._mineCount - this.cells.reduce((sum, row) => sum + row.filter(c => c.flagged === 'flag').length, 0);
+        return this.mineCount - this.cells.reduce((sum, row) => sum + row.filter(c => c.flagged === 'flag').length, 0);
     }
 
     get playing() {
         return this._playing;
     }
 
-    constructor (private width: number, private height: number) {
-        this._mineCount= Math.floor(width * height * 0.15)
+    constructor (private width: number, private height: number, private mineCount: number) {
         this.cells = []; 
 
         this.generateCells(height, width); 
-        this.generateMines(this._mineCount);
+        this.generateMines(this.mineCount);
         this.configureNeighbours();
     }
 
