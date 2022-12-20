@@ -1,5 +1,5 @@
 export class CellState{
-    constructor(private onBang : () => void, private onClear: () => void){
+    constructor(public key: number, private onBang : () => void, private onClear: () => void){
     }
 
     private _isBlown = false;
@@ -152,7 +152,7 @@ export class FieldStates{
             this.cells.push([]);
 
             for (let col = 0; col < width; ++col) {
-                this.cells[row].push(new CellState(() => this.onBang(), () => this.onClear()));
+                this.cells[row].push(new CellState(row * width + col, () => this.onBang(), () => this.onClear()));
             }
         }
     }

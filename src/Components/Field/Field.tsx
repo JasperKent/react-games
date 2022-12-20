@@ -62,11 +62,15 @@ export const Field = () => {
     }    
 
     const changeWidth = (w: number) => {
+        w = isNaN(w) ? 0 : w;
+
         setWidth(w);
         setCoverCount(Math.floor (w * height * coverPercent/100));
     }
     
     const changeHeight = (h: number) => {
+        h = isNaN(h) ? 0 : h;
+
         setHeight(h);
         setCoverCount(Math.floor (width * h * coverPercent/100));
     }
@@ -81,12 +85,13 @@ export const Field = () => {
                 </span>
             </div>
             <div className="field" style={fieldStyle}>
-                {cells.map(r => r.map(c => <Cell onFlag={()=>cellFlag(c)} 
+                {cells.map(r => r.map(c => <Cell key={c.key} onFlag={()=>cellFlag(c)} 
                                                 onClick={()=>cellClick(c)} 
                                                 onDoubleClick={()=>cellDoubleClick(c)} 
                                                 cellState={c} />))}
             </div>
-            <div className="bottom-row"><button onClick={reset}>Reset</button>
+            <div className="bottom-row">
+                <button onClick={reset}>Reset</button>
                 <span>
                     <label>Lay</label><input type="number" value={coverCount} onChange={e => changeCoverCount(parseInt(e.target.value))} />
                     <label>mines or</label><input type="number" value={coverPercent} onChange={e => changeCoverPercent(parseInt(e.target.value))} /><label>%.{"   "}</label>
