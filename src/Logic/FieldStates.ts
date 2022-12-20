@@ -23,11 +23,11 @@ export class CellState{
         }
     }
 
-    public get flagged(): 'none' | 'query' | 'flag' {
+    get flagged(): 'none' | 'query' | 'flag' {
         return this._flagged;
     }
 
-    public set flagged(value: 'none' | 'query' | 'flag') {
+    private set flagged(value: 'none' | 'query' | 'flag') {
         if (this.isBlown){
             this._flagged = 'none';
         }

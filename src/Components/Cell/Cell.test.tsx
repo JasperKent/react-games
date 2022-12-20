@@ -93,7 +93,7 @@ test('blown unmined cell has mine-shown val-0 class', () => {
 test('flagged cell has mine-flagged class', () => {
     const state = new CellState(0, () => {},() => {});
 
-    state.flagged = 'flag';
+    state.flag();
 
     const {container} = render(<Cell data-testid="test" cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
 
@@ -102,10 +102,11 @@ test('flagged cell has mine-flagged class', () => {
     expect(buttonElement).toHaveClass('mine-flagged');
 });
 
-test('flagged cell has mine-query class', () => {
+test('queried cell has mine-query class', () => {
     const state = new CellState(0, () => {},() => {});
 
-    state.flagged = 'query';
+    state.flag();
+    state.flag();
 
     const {container} = render(<Cell data-testid="test" cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
 
