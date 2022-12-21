@@ -1,54 +1,43 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { CellState } from '../../Logic/CellState';
 import { Field } from './Field';
 
-test('renders top row', () => {   
-    const {container} = render(<Field />);
+function generateCells (width: number, height: number): CellState[][]
+{
+    const cells: CellState[][] = [];
 
-    const topRowElement = container.querySelector('div.top-row');
+    for (let row = 0; row < height; ++row) {
+        cells.push([]);
 
-    expect(topRowElement).toBeInTheDocument();
-});
+        for (let col = 0; col < width; ++col) {
+            cells[row].push(new CellState(row * width + col, () => {}, () => {}));
+        }
+    }
 
-test('renders bottom row', () => {   
-    const {container} = render(<Field />);
+    return cells;
+}
 
-    const bottomRowElement = container.querySelector('div.bottom-row');
+test('renders 50 cells when 5 x 10', () => {   
+    const cells = generateCells(5, 10);
 
-    expect(bottomRowElement).toBeInTheDocument();
-});
+    const {container} = render(<Field cells={cells} playing="playing" refresh={() => {}}  />);
 
-test('renders cell section', () => {   
-    const {container} = render(<Field />);
-
-    const cellsElement = container.querySelector('div.field');
-
-    expect(cellsElement).toBeInTheDocument();
-});
-
-test('renders 800 cells by default', () => {   
-    const {container} = render(<Field />);
-
-    const buttons = container.querySelectorAll('div.field button');
-
-    expect(buttons.length).toBe(800);
-});
-
-test('renders 50 cells when 5 x 10', async () => {   
-    const {container} = render(<Field />);
-
-    const widthInput = screen.getByDisplayValue(40);
-    const heightInput = screen.getByDisplayValue(20);
-    const reset = screen.getByText('Reset');
-
-    userEvent.clear(widthInput);
-    userEvent.clear(heightInput);
-    userEvent.type(widthInput,'5');
-    userEvent.type(heightInput,'10');
-
-    userEvent.click(reset);
-   
     const buttons = container.querySelectorAll('div.field button');
 
     expect(buttons.length).toBe(50);
+});
+
+test('cell click causes refresh', () => {   
+    let clicked = false;
+
+    const cells = generateCells(5, 10);
+
+    render(<Field cells={cells} playing="playing" refresh={() => clicked = true }  />);
+    
+    const buttonElement = screen.getAllByRole('button');
+
+    userEvent.click(buttonElement[0]);
+
+    expect(clicked).toBeTruthy();
 });
