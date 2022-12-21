@@ -16,7 +16,7 @@ test('renders button', () => {
 test('button has mine-hidden class', () => {
     const state = new CellState(0, () => {},() => {});
 
-    render(<Cell data-testid="test" cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
+    render(<Cell cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
 
     const buttonElement = screen.getByRole('button');
 
@@ -28,7 +28,7 @@ test('button clicked calls onClick', () => {
 
     let clicked = false;
 
-    render(<Cell data-testid="test" cellState={state} onClick={()=>{clicked = true;}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
+    render(<Cell cellState={state} onClick={()=>{clicked = true;}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
 
     const buttonElement = screen.getByRole('button');
 
@@ -42,7 +42,7 @@ test('button double clicked calls onDoubleClick', () => {
 
     let clicked = false;
 
-    render(<Cell data-testid="test" cellState={state} onClick={()=>{}} onDoubleClick={()=>{clicked = true;}} onFlag={()=>{}}/>);
+    render(<Cell cellState={state} onClick={()=>{}} onDoubleClick={()=>{clicked = true;}} onFlag={()=>{}}/>);
 
     const buttonElement = screen.getByRole('button');
 
@@ -56,7 +56,7 @@ test('button right clicked calls onFLag', () => {
 
     let clicked = false;
 
-    render(<Cell data-testid="test" cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{clicked = true;}}/>);
+    render(<Cell cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{clicked = true;}}/>);
 
     const buttonElement = screen.getByRole('button');
 
@@ -71,7 +71,7 @@ test('blown mined cell has mine-blown class', () => {
     state.isMined = true;
     state.isBlown = true;
 
-    render(<Cell data-testid="test" cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
+    render(<Cell cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
 
     const buttonElement = screen.getByRole('button');
     
@@ -83,7 +83,7 @@ test('blown unmined cell has mine-shown val-0 class', () => {
 
     state.isBlown = true;
 
-    const {container} = render(<Cell data-testid="test" cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
+    const {container} = render(<Cell cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
 
     const buttonElement = container.querySelector('button');
     
@@ -95,7 +95,7 @@ test('flagged cell has mine-flagged class', () => {
 
     state.flag();
 
-    const {container} = render(<Cell data-testid="test" cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
+    const {container} = render(<Cell cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
 
     const buttonElement = container.querySelector('button');
     
@@ -108,10 +108,9 @@ test('queried cell has mine-query class', () => {
     state.flag();
     state.flag();
 
-    const {container} = render(<Cell data-testid="test" cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
+    const {container} = render(<Cell cellState={state} onClick={()=>{}} onDoubleClick={()=>{}} onFlag={()=>{}}/>);
 
     const buttonElement = container.querySelector('button');
     
     expect(buttonElement).toHaveClass('mine-query');
 });
-
