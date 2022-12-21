@@ -3,6 +3,6 @@ import { App } from './App';
 
 test('renders learn react link', () => {
   render(<App />);
-  const titleElement = screen.getByText(/Minesweeper/i);
-  expect(titleElement).toBeInTheDocument();
+  const titleElement = screen.getAllByText(/Minesweeper/i);
+  expect(titleElement[0]).toBeInTheDocument();
 });

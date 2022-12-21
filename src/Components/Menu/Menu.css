@@ -1,0 +1,27 @@
+
+.App-header {
+    background-color: #353944;
+    color: #fff;
+    font-size: calc(10px + 1vmin);
+    padding: 1rem;
+  }
+  
+    .App-header a {
+      color:#fff;
+      font-weight: normal;
+    }
+    .App-header ul {    
+      padding: 0;
+    }
+    
+    .App-header li {
+      list-style: none;
+      display: inline;
+      padding: 1rem;
+      font-weight: bold;
+    }
+  
+    .App-header li:first-child {
+      padding-left: 0; 
+    }
+  
