@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { CellState } from '../../Logic/CellState';
 import { FieldStates } from '../../Logic/FieldStates';
+import { BottomRow } from '../BottomRow/BottomRow';
 import { Cell } from '../Cell/Cell';
 import { Counter } from '../Counter/Counter';
 import './Field.css';
 
 export const Field = () => {
-    const [width, setWidth] = useState(40);
-    const [height, setHeight] = useState(20);
-    const [coverPercent, setCoverPercent] = useState(15);
-    const [coverCount, setCoverCount] = useState(Math.floor(width * height * coverPercent/100));
-   
-    const [states,setStates] = useState(() => new FieldStates(width, height, coverCount));
+    const initWidth = 40;
+    const initHeight = 20;
+    const initCoverPercent = 15;
+
+    const [states,setStates] = useState(() => new FieldStates(initWidth, initHeight, Math.floor(initWidth * initHeight * initCoverPercent / 100)));
     const [cells, setCells] = useState(states.cells);
     const [unexploded, setUnexploded] = useState(states.unexploded);
     const [playing, setPlaying] = useState(states.playing);
-    const [fieldStyle, setFieldStyle] = useState({ width: `${width * FieldStates.CellWidth}px`});
+    const [fieldStyle, setFieldStyle] = useState({ width: `${initWidth * FieldStates.CellWidth}px`});
 
     const cellClick = (cell: CellState) => {
         if (playing){
@@ -42,7 +42,7 @@ export const Field = () => {
         }
     }
 
-    const reset = () => {
+    const reset = (width: number, height: number, coverCount: number) => {
         var newStates = new FieldStates(width, height, coverCount);
 
         setStates(newStates);
@@ -50,30 +50,6 @@ export const Field = () => {
         setPlaying(newStates.playing);
         setCells(newStates.cells);
         setFieldStyle({ width: `${width * FieldStates.CellWidth}px`});
-    }
-
-    const changeCoverCount = (count: number) => {
-        setCoverCount(count);
-        setCoverPercent((count * 100)/(width * height));
-    }
-
-    const changeCoverPercent = (percent: number) => {
-        setCoverPercent(percent);
-        setCoverCount(Math.floor (width * height * percent/100));
-    }    
-
-    const changeWidth = (w: number) => {
-        w = isNaN(w) ? 0 : w;
-
-        setWidth(w);
-        setCoverCount(Math.floor (w * height * coverPercent/100));
-    }
-    
-    const changeHeight = (h: number) => {
-        h = isNaN(h) ? 0 : h;
-
-        setHeight(h);
-        setCoverCount(Math.floor (width * h * coverPercent/100));
     }
     
     return(
@@ -91,15 +67,7 @@ export const Field = () => {
                                                 onDoubleClick={()=>cellDoubleClick(c)} 
                                                 cellState={c} />))}
             </div>
-            <div className="bottom-row">
-                <button onClick={reset}>Reset</button>
-                <span>
-                    <label>Lay</label><input type="number" value={coverCount} onChange={e => changeCoverCount(parseInt(e.target.value))} />
-                    <label>mines or</label><input type="number" value={coverPercent} onChange={e => changeCoverPercent(parseInt(e.target.value))} /><label>%.{"   "}</label>
-                    <label>Width:</label><input type="number" value={width} onChange={e => changeWidth(parseInt(e.target.value))} />
-                    <label>Height:</label><input type="number" value={height} onChange={e => changeHeight(parseInt(e.target.value))} />
-                </span>
-            </div>
+            <BottomRow width={initWidth} height={initHeight} percent={initCoverPercent} onReset={reset}></BottomRow>
         </>
     ); 
 };
