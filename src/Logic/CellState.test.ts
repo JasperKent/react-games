@@ -1,4 +1,4 @@
-import { CellState } from './FieldStates';
+import { CellState } from './CellState';
 
 test('creation', () => {   
     const cell = new CellState(1, () => {}, () => {});

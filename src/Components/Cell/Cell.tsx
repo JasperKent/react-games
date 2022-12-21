@@ -1,4 +1,4 @@
-import { CellState } from "../../Logic/FieldStates";
+import { CellState } from "../../Logic/CellState";
 import './Cell.css';
 
 type Props = {

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { CellState, FieldStates } from '../../Logic/FieldStates';
+import { CellState } from '../../Logic/CellState';
+import { FieldStates } from '../../Logic/FieldStates';
 import { Cell } from '../Cell/Cell';
 import { Counter } from '../Counter/Counter';
 import './Field.css';
