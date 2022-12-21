@@ -29,6 +29,6 @@ export const Cell = ({cellState, onClick, onFlag, onDoubleClick}: Props) => {
     };
 
     return (
-        <button onClick={onClick} className={getClass(cellState)} onContextMenu={onRightClick} onDoubleClick={onDoubleClick}></button>
+        <button onClick={onClick} className={'mine-cell ' + getClass(cellState)} onContextMenu={onRightClick} onDoubleClick={onDoubleClick}></button>
     );
 }
