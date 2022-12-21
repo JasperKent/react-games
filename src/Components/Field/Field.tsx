@@ -4,6 +4,7 @@ import { FieldStates } from '../../Logic/FieldStates';
 import { BottomRow } from '../BottomRow/BottomRow';
 import { Cell } from '../Cell/Cell';
 import { Counter } from '../Counter/Counter';
+import { TopRow } from '../TopRow/TopRow';
 import './Field.css';
 
 export const Field = () => {
@@ -54,13 +55,7 @@ export const Field = () => {
     
     return(
         <>
-            <div className="top-row">
-                <Counter count={unexploded}></Counter>
-                <span className='message-text'>
-                    {playing === 'lost' && 'Bad luck! Try again.'}
-                    {playing === 'won' && 'Congratulations! You cleared the field.'}
-                </span>
-            </div>
+            <TopRow playing={playing} unexploded={unexploded}></TopRow>
             <div className="field" style={fieldStyle}>
                 {cells.map(r => r.map(c => <Cell key={c.key} onFlag={()=>cellFlag(c)} 
                                                 onClick={()=>cellClick(c)} 
