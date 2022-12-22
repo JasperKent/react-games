@@ -7,46 +7,6 @@ export class Solver {
 
     constructor (){
         this.generateCells();
-
-        // this.cells[0][0].inputValue = 1;
-        // this.cells[7][0].inputValue = 9;     
-           
-        // this.cells[1][1].inputValue = 5;        
-        // this.cells[3][1].inputValue = 3;        
-        // this.cells[4][1].inputValue = 2;        
-        // this.cells[6][1].inputValue = 8;        
-
-        // this.cells[0][2].inputValue = 8;
-        // this.cells[1][2].inputValue = 9;
-        // this.cells[2][2].inputValue = 3;
-        // this.cells[5][2].inputValue = 1;
- 
-        // this.cells[0][3].inputValue = 6;
-        // this.cells[1][3].inputValue = 8;
-        // this.cells[6][3].inputValue = 1;
-        // this.cells[7][3].inputValue = 2;
-
-        // this.cells[3][4].inputValue = 1;
-        // this.cells[4][4].inputValue = 9;
-        // this.cells[5][4].inputValue = 6;
-       
-        // this.cells[1][5].inputValue = 1;
-        // this.cells[2][5].inputValue = 5;
-        // this.cells[7][5].inputValue = 6;
-        // this.cells[8][5].inputValue = 3;
-
-        // this.cells[3][6].inputValue = 8;
-        // this.cells[6][6].inputValue = 2;
-        // this.cells[7][6].inputValue = 1;
-        // this.cells[8][6].inputValue = 4;
-
-        // this.cells[2][7].inputValue = 1;
-        // this.cells[4][7].inputValue = 6;
-        // this.cells[5][7].inputValue = 4;
-        // this.cells[7][7].inputValue = 3;
-
-        // this.cells[1][8].inputValue = 2;
-        // this.cells[8][8].inputValue = 5;
     }
 
     private generateCells(){
