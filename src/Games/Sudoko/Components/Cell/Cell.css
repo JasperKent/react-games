@@ -1,0 +1,19 @@
+
+.sudoko-grid input {
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
+    text-align: center;
+    border: none;
+    outline: 0 solid transparent;
+}
+
+.sudoko-grid input.cell-input {
+    color:blue;
+}
+
+.sudoko-grid input.cell-solved {
+    color:red;
+}
+
+

@@ -1,17 +1,26 @@
-export const Grid = () => {
-    const cells: number[][] = [];
+import { SolverCell } from "../../Logic/SolverCell";
+import { Cell } from "../Cell/Cell";
+import "./Grid.css"
 
-    for (let col = 0; col < 9; ++col){
-        cells.push([]);
+type Props = {
+    cells: SolverCell[][];
+    onValueSet: (x: number, y: number, value: number | null) => void;
+};
 
-        for (let row = 0; row < 9; ++row){
-            cells[col].push(row);
-        }
-    }
+export const Grid = ({onValueSet, cells}: Props) => {
+
+    const numbers = [0,1,2,3,4,5,6,7,8];
 
     return (
-        <div>
-            {cells.map(r => r.map(c => <input />))}
-        </div>
+        <table className="sudoko-grid">
+            <tbody>
+                {numbers.map(y => (
+                    <tr key={y}>{numbers.map(x => (
+                        <td key={y * 9 + x} >
+                            <Cell cell={cells[x][y]} onValueSet={val => onValueSet(x, y, val)} />
+                        </td>))}
+                </tr>))}
+            </tbody>
+        </table>
     );
 }
