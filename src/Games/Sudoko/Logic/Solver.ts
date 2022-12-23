@@ -22,7 +22,7 @@ export class Solver {
         }
     }
 
-    private helpfulNeighbourCount(cell: SolverCell): number {
+    private occupiedNeighbourCount(cell: SolverCell): number {
         if (cell.inputValue !==  null){
             return 0;
         }
@@ -83,27 +83,35 @@ export class Solver {
         return false;
     }
 
-    solve (): boolean {      
-        this.allCells.forEach(c => c.count = this.helpfulNeighbourCount(c));
-        this.allCells.filter(c => c.inputValue !== null).forEach(c => c.testValue = c.inputValue ?? 0);
-        this.allCells.sort((l, r) => r.count - l.count);
-
+    private iterateCells() {
         let index = 0;
-    
-        while (index >= 0 && index < this.allCells.length){
+
+        while (index >= 0 && index < this.allCells.length) {
             const cell = this.allCells[index];
 
             let valid = this.tryCell(cell);
 
-            if(valid){
+            if (valid) {
                 ++index;
             }
-            else{
+            else {
                 --index;
             }
         }
 
         return index >= 0;
+    }
+
+    private sortCells() {
+        this.allCells.forEach(c => c.count = this.occupiedNeighbourCount(c));
+        this.allCells.filter(c => c.inputValue !== null).forEach(c => c.testValue = c.inputValue ?? 0);
+        this.allCells.sort((l, r) => r.count - l.count);
+    }
+
+    solve (): boolean {      
+        this.sortCells();
+
+        return this.iterateCells();
     }
 
     setCell(x: number, y: number, value: number | null): void {
