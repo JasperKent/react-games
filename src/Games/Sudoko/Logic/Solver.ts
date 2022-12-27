@@ -85,18 +85,16 @@ export class Solver {
 
     private iterateCells() {
         let index = 0;
+        let direction: 1 | -1 = 1;
 
         while (index >= 0 && index < this.allCells.length) {
             const cell = this.allCells[index];
 
-            let valid = this.tryCell(cell);
+            if (!cell.inputValue){
+                direction = this.tryCell(cell) ? 1 : -1;
+            }
 
-            if (valid) {
-                ++index;
-            }
-            else {
-                --index;
-            }
+            index += direction;            
         }
 
         return index >= 0;
