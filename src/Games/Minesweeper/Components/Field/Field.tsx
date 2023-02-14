@@ -3,7 +3,7 @@ import { FieldStates } from '../../Logic/FieldStates';
 import { Cell } from '../Cell/Cell';
 import './Field.css';
 
-type Props = {
+interface Props {
     cells: CellState[][];
     playing: 'playing' | 'won' | 'lost';
     refresh: () => void;
