@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MinesweeperContext } from "../../contexts/MinesweeperContext";
 import './BottomRow.css';
 
 type Props = {
     width: number;
     height: number;
     percent: number;
-    onReset: (width: number, height: number, coverCount: number) => void;
 }
 
 export const BottomRow = (props: Props) =>{
@@ -14,6 +14,8 @@ export const BottomRow = (props: Props) =>{
     const [coverPercent, setCoverPercent] = useState(props.percent);
     const [coverCount, setCoverCount] = useState(Math.floor(width * height * coverPercent/100));
     
+    const {reset} = useContext(MinesweeperContext);
+
     const changeCoverCount = (count: number) => {
         setCoverCount(count);
         setCoverPercent((count * 100)/(width * height));
@@ -40,7 +42,7 @@ export const BottomRow = (props: Props) =>{
 
     return (
         <div className="bottom-row">
-            <button onClick={() => props.onReset(width, height, coverCount)}>Reset</button>
+            <button onClick={() => reset(width, height, coverCount)}>Reset</button>
             <span>
                 <label>Lay</label><input type="number" value={coverCount} onChange={e => changeCoverCount(parseInt(e.target.value))} />
                 <label>mines or</label><input type="number" value={coverPercent} onChange={e => changeCoverPercent(parseInt(e.target.value))} /><label>%.{"   "}</label>

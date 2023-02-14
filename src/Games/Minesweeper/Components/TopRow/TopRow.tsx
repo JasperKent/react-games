@@ -1,12 +1,11 @@
+import { useContext } from "react";
+import { MinesweeperContext } from "../../contexts/MinesweeperContext";
 import { Counter } from "../Counter/Counter";
 import './TopRow.css'
 
-type Props = {
-    unexploded: number;
-    playing: 'lost' | 'won' | 'playing';
-}
+export const TopRow = () => {
+    const {playing, unexploded} = useContext(MinesweeperContext);
 
-export const TopRow = ({unexploded, playing}: Props) => {
     return(
         <div className="top-row">
         <Counter count={unexploded}></Counter>

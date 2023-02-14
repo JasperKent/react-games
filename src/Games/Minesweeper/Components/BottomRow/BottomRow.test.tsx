@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { DefaultMinesweeperData, MinesweeperContext, MinesweeperData } from "../../contexts/MinesweeperContext";
 import { BottomRow } from "./BottomRow";
 
 test('creation', () => {   
-    const {container} = render(<BottomRow percent={10} height={4} width={3} onReset={(w,h,c)=>{}} />);
+    const {container} = render(<BottomRow percent={10} height={4} width={3} />);
 
     const div = container.querySelector('div.bottom-row');
 
@@ -11,7 +12,7 @@ test('creation', () => {
 });
 
 test('cover percent gives cover count', () => {   
-    render(<BottomRow percent={10} height={40} width={30} onReset={(w,h,c)=>{}} />);
+    render(<BottomRow percent={10} height={40} width={30} />);
 
     const countInput = screen.getByDisplayValue(120);
 
@@ -23,7 +24,9 @@ test('onReset called with correct values', () => {
     let height = 0;
     let count = 0;
 
-    render(<BottomRow percent={10} height={40} width={30} onReset={(w,h,c)=>{width = w; height = h; count = c }} />);
+    const values: MinesweeperData = {...DefaultMinesweeperData, reset: (w,h,c) => {width = w; height = h; count = c;} };
+
+    render(<MinesweeperContext.Provider value={values}><BottomRow percent={10} height={40} width={30} /></MinesweeperContext.Provider>);
 
     const reset = screen.getByText('Reset');
 

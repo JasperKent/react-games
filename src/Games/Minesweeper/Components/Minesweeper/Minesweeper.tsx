@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MinesweeperProvider } from "../../contexts/MinesweeperContext";
 import { FieldStates } from "../../Logic/FieldStates";
 import { BottomRow } from "../BottomRow/BottomRow";
 import { Field } from "../Field/Field";
@@ -10,32 +11,17 @@ export const Minesweeper = () => {
     const initHeight = 20;
     const initCoverPercent = 15;
 
-    const [states,setStates] = useState(() => new FieldStates(initWidth, initHeight, Math.floor(initWidth * initHeight * initCoverPercent / 100)));
-    const [cells, setCells] = useState(states.cells);
-    const [unexploded, setUnexploded] = useState(states.unexploded);
-    const [playing, setPlaying] = useState(states.playing);
-
-    const reset = (width: number, height: number, coverCount: number) => {
-        var newStates = new FieldStates(width, height, coverCount);
-
-        setStates(newStates);
-        setUnexploded(newStates.unexploded);
-        setPlaying(newStates.playing);
-        setCells(newStates.cells);
-    }
-
-    const refresh = () => {
-        setCells([...cells]);
-        setUnexploded(states.unexploded);
-        setPlaying(states.playing);
-    };
-
     return (
         <div className="game">
             <h1>Minesweeper</h1>
-            <TopRow playing={playing} unexploded={unexploded}></TopRow>
-            <Field cells={cells} playing={playing} refresh={refresh}></Field>
-            <BottomRow width={initWidth} height={initHeight} percent={initCoverPercent} onReset={reset}></BottomRow>
+            <MinesweeperProvider 
+                initHeight={initWidth} 
+                initWidth={initHeight} 
+                initCoverPercent={initCoverPercent}>
+                <TopRow></TopRow>
+                {/* <Field cells={cells} playing={playing} refresh={refresh}></Field>*/}
+                <BottomRow width={initWidth} height={initHeight} percent={initCoverPercent}></BottomRow> 
+            </MinesweeperProvider>
         </div>
     );
 };

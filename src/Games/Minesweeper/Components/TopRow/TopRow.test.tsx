@@ -1,8 +1,9 @@
 import { render } from "@testing-library/react";
+import { DefaultMinesweeperData, MinesweeperContext, MinesweeperData } from "../../contexts/MinesweeperContext";
 import { TopRow } from "./TopRow";
 
 test('creation', () => {   
-    const {container} = render(<TopRow playing="playing" unexploded={10} />);
+    const {container} = render(<TopRow />);
 
     const div = container.querySelector('div.top-row');
 
@@ -10,7 +11,9 @@ test('creation', () => {
 });
 
 test('won message', () => {   
-    const {container} = render(<TopRow playing="won" unexploded={10} />);
+    const values = {...DefaultMinesweeperData, unexploded: 10};
+
+    const {container} = render(<MinesweeperContext.Provider value={values}> <TopRow /></MinesweeperContext.Provider>);
 
     const message = container.querySelector('.message-text');
 
@@ -18,15 +21,19 @@ test('won message', () => {
 });
 
 test('lost message', () => {   
-    const {container} = render(<TopRow playing="lost" unexploded={10} />);
+    const values: MinesweeperData = {...DefaultMinesweeperData, playing: 'lost'};
+
+    const {container} = render(<MinesweeperContext.Provider value={values}> <TopRow /></MinesweeperContext.Provider>);
 
     const message = container.querySelector('.message-text');
 
     expect(message?.textContent).toEqual('Bad luck! Try again.');
 });
 
-test('no message when playing', () => {   
-    const {container} = render(<TopRow playing="playing" unexploded={10} />);
+test('no message when playing', () => { 
+    const values: MinesweeperData = {...DefaultMinesweeperData, playing: 'playing'};
+    
+    const {container} = render(<MinesweeperContext.Provider value={values}> <TopRow /></MinesweeperContext.Provider>);
 
     const message = container.querySelector('.message-text');
 
