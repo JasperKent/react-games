@@ -1,15 +1,13 @@
+import { useContext } from 'react';
+import { MinesweeperContext } from '../../contexts/MinesweeperContext';
 import { CellState } from '../../Logic/CellState';
 import { FieldStates } from '../../Logic/FieldStates';
 import { Cell } from '../Cell/Cell';
 import './Field.css';
 
-interface Props {
-    cells: CellState[][];
-    playing: 'playing' | 'won' | 'lost';
-    refresh: () => void;
-}
+export const Field = () => {
 
-export const Field = ({cells, playing, refresh}: Props) => {
+    const {playing, refresh, cells} = useContext(MinesweeperContext);
 
     const fieldStyle = { width: `${cells[0].length * FieldStates.CellWidth}px`};
 

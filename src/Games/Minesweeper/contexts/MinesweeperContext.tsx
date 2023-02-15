@@ -1,19 +1,18 @@
 import {createContext, PropsWithChildren, useState} from 'react';
+import { CellState } from '../Logic/CellState';
 import { FieldStates } from '../Logic/FieldStates';
 
 export interface MinesweeperData {
     playing: 'lost' | 'won' | 'playing';
     unexploded: number;
+    cells: CellState[][];
     reset: (width: number, height: number, coverCount: number) => void;
+    refresh: () => void;
 }
 
-export const DefaultMinesweeperData: MinesweeperData = {playing: 'won', unexploded: 0, reset: ()=>{}};
+export const DefaultMinesweeperData: MinesweeperData = {playing: 'won', unexploded: 0, reset: ()=>{}, refresh: ()=>{}, cells:[[]]};
 
-export const MinesweeperContext = createContext<MinesweeperData>({
-    playing: 'playing',
-    reset: () => {},
-    unexploded: 0
-});
+export const MinesweeperContext = createContext<MinesweeperData>(DefaultMinesweeperData);
 
 interface Props {
     initWidth: number;
@@ -43,7 +42,7 @@ export const MinesweeperProvider = ({children, initWidth, initHeight, initCoverP
     };
 
     return(
-        <MinesweeperContext.Provider value={{ unexploded, playing, reset }}>
+        <MinesweeperContext.Provider value={{ unexploded, playing, reset, cells, refresh }}>
             {children}
         </MinesweeperContext.Provider>
     );

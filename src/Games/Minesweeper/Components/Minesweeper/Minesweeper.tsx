@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { MinesweeperProvider } from "../../contexts/MinesweeperContext";
-import { FieldStates } from "../../Logic/FieldStates";
 import { BottomRow } from "../BottomRow/BottomRow";
 import { Field } from "../Field/Field";
 import { TopRow } from "../TopRow/TopRow";
@@ -15,11 +13,11 @@ export const Minesweeper = () => {
         <div className="game">
             <h1>Minesweeper</h1>
             <MinesweeperProvider 
-                initHeight={initWidth} 
-                initWidth={initHeight} 
+                initHeight={initHeight} 
+                initWidth={initWidth} 
                 initCoverPercent={initCoverPercent}>
                 <TopRow></TopRow>
-                {/* <Field cells={cells} playing={playing} refresh={refresh}></Field>*/}
+                <Field></Field>
                 <BottomRow width={initWidth} height={initHeight} percent={initCoverPercent}></BottomRow> 
             </MinesweeperProvider>
         </div>

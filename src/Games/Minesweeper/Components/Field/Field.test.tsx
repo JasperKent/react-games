@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { DefaultMinesweeperData, MinesweeperContext, MinesweeperData } from '../../contexts/MinesweeperContext';
 import { CellState } from '../../Logic/CellState';
 import { Field } from './Field';
 
@@ -21,7 +22,9 @@ function generateCells (width: number, height: number): CellState[][]
 test('renders 50 cells when 5 x 10', () => {   
     const cells = generateCells(5, 10);
 
-    const {container} = render(<Field cells={cells} playing="playing" refresh={() => {}}  />);
+    const values: MinesweeperData = {...DefaultMinesweeperData, cells, playing: 'playing'};
+
+    const {container} = render(<MinesweeperContext.Provider value={values}><Field  /></MinesweeperContext.Provider>);
 
     const buttons = container.querySelectorAll('div.field button');
 
@@ -33,7 +36,9 @@ test('cell click causes refresh', () => {
 
     const cells = generateCells(5, 10);
 
-    render(<Field cells={cells} playing="playing" refresh={() => clicked = true }  />);
+    const values: MinesweeperData = {...DefaultMinesweeperData, cells, playing: 'playing', refresh: () => clicked = true};
+
+    render(<MinesweeperContext.Provider value={values}><Field  /></MinesweeperContext.Provider>);
     
     const buttonElement = screen.getAllByRole('button');
 
