@@ -1,44 +1,16 @@
-import { useContext, useState } from "react";
-import { MinesweeperContext } from "../../contexts/MinesweeperContext";
+import { useConfigureField } from "../../hooks/useConfigureField";
 import './BottomRow.css';
 
-type Props = {
-    width: number;
-    height: number;
-    percent: number;
+interface Props {
+    initWidth: number;
+    initHeight: number;
+    initPercent: number;
 }
 
-export const BottomRow = (props: Props) =>{
-    const [width, setWidth] = useState(props.width);
-    const [height, setHeight] = useState(props.height);
-    const [coverPercent, setCoverPercent] = useState(props.percent);
-    const [coverCount, setCoverCount] = useState(Math.floor(width * height * coverPercent/100));
-    
-    const {reset} = useContext(MinesweeperContext);
+export const BottomRow = ({initWidth, initHeight, initPercent}: Props) =>{
 
-    const changeCoverCount = (count: number) => {
-        setCoverCount(count);
-        setCoverPercent((count * 100)/(width * height));
-    }
-
-    const changeCoverPercent = (percent: number) => {
-        setCoverPercent(percent);
-        setCoverCount(Math.floor (width * height * percent/100));
-    }    
-
-    const changeWidth = (w: number) => {
-        w = isNaN(w) ? 0 : w;
-
-        setWidth(w);
-        setCoverCount(Math.floor (w * height * coverPercent/100));
-    }
-    
-    const changeHeight = (h: number) => {
-        h = isNaN(h) ? 0 : h;
-
-        setHeight(h);
-        setCoverCount(Math.floor (width * h * coverPercent/100));
-    }
+    const {reset, width, height, coverCount, coverPercent, changeCoverCount, changeCoverPercent, changeWidth, changeHeight }
+        = useConfigureField(initWidth, initHeight, initPercent);
 
     return (
         <div className="bottom-row">

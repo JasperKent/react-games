@@ -18,7 +18,7 @@ export const Minesweeper = () => {
                 initCoverPercent={initCoverPercent}>
                 <TopRow></TopRow>
                 <Field></Field>
-                <BottomRow width={initWidth} height={initHeight} percent={initCoverPercent}></BottomRow> 
+                <BottomRow initWidth={initWidth} initHeight={initHeight} initPercent={initCoverPercent}></BottomRow> 
             </MinesweeperProvider>
         </div>
     );
